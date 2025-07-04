@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: kong-issuer
+  namespace: frisboo-bank-kong
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: jonathan.houze@gmail.com
+    privateKeySecretRef:
+      name: kong-issuer
+      namespace: frisboo-bank-kong
+    solver:
+      - dns01:
