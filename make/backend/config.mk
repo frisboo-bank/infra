@@ -11,8 +11,10 @@ MIN_GO_VERSION ?= 1.20
 
 # Project-specific variables
 MODULE ?= $(shell go list -m)
-MOCKS ?= mocks
-COVERAGE ?= coverage.out
+NAME   ?= $(notdir $(MODULE))
+
+MOCKS_DIR ?= mocks
+COVERAGE_DIR ?= coverage.out
 
 # Theme used for syntax highlighting (chroma --list to have the available list)
 CHROMA_THEME ?= rrt

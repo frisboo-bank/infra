@@ -15,13 +15,13 @@ quick-test:
 ## test/coverage: Run tests with code coverage
 .PHONY: coverage
 coverage:
-	go test -coverprofile=$(COVERAGE) ./...
-	go tool cover -func=$(COVERAGE)
+	go test -coverprofile=$(COVERAGE_DIR) ./...
+	go tool cover -func=$(COVERAGE_DIR)
 
 ## test/coverage-html: Open HTML coverage report in browser
 .PHONY: coverage-html
 coverage-html:
-	go tool cover -html=$(COVERAGE)
+	go tool cover -html=$(COVERAGE_DIR)
 
 ## test/bench: Run Go benchmarks
 .PHONY: bench
