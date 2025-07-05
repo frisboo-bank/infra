@@ -10,7 +10,7 @@ generate:
 ## dev/generate-mock: Generate mocks with mockery
 .PHONY: generate-mock
 generate-mock:
-	mockery --all --output=$(MOCKS)
+	mockery --all --output=$(MOCKS_DIR)
 
 ## dev/doc: Generate documentation [PKG=pattern] (e.g., make doc PKG=core)
 .PHONY: doc
