@@ -1,3 +1,5 @@
+# utils.mk - Utility targets for Go backend projects
+
 .PHONY: check-go-version
 check-go-version:
 	@current=$$(go version | awk '{print $$3}' | sed 's/go//'); \

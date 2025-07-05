@@ -1,20 +1,20 @@
-#
-# MISC
-#
+# misc.mk - Miscellaneous utility targets
 
 SECTION_MAPS += misc:Miscellaneous
 
 ## misc/clean: Clean build/test artifacts
 .PHONY: clean
 clean:
-	rm -f $(COVERAGE)
+	go clean
+	rm -rf $(COVERAGE)
+	rm -rf $(DIST_DIR)
 	rm **/*_enums.go
-	rm -rf ./mocks
+	rm -rf $(MOCKS_DIR)
 
 ## misc/version: Print project version
 .PHONY: version
 version:
-	@echo "Library:     $(MODULE)"
+	@echo "Project:     $(MODULE)"
 	@echo "Version:     $$(git describe --tags --always --dirty 2>/dev/null || echo "No version tag")"
 	@echo "Commit:      $$(git rev-parse --short HEAD 2>/dev/null || echo 'unknown')"
 	@echo "Build Time:  $$(date -u +"%Y-%m-%dT%H:%M:%SZ")"

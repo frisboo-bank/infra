@@ -1,4 +1,4 @@
-# checks.mk - Verification checks
+# checks.mk - Verification and CI check targets
 
 SECTION_MAPS += checks:Checks
 
@@ -13,8 +13,3 @@ ci: check
 ## checks/precommit: Run pre-commit checks
 .PHONY: precommit
 precommit: check
-
-## checks/push: Run checks and push
-.PHONY: push
-push: precommit no-dirty
-	git push

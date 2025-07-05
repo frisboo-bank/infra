@@ -1,4 +1,4 @@
-# testing.mk - Testing targets
+# testing.mk - Test and coverage targets
 
 SECTION_MAPS += test:Testing
 
@@ -15,13 +15,13 @@ quick-test:
 ## test/coverage: Run tests with code coverage
 .PHONY: coverage
 coverage:
-	go test -coverprofile=$(COVERAGE_DIR) ./...
-	go tool cover -func=$(COVERAGE_DIR)
+	go test -coverprofile=$(COVERAGE) ./...
+	go tool cover -func=$(COVERAGE)
 
 ## test/coverage-html: Open HTML coverage report in browser
 .PHONY: coverage-html
 coverage-html:
-	go tool cover -html=$(COVERAGE_DIR)
+	go tool cover -html=$(COVERAGE)
 
 ## test/bench: Run Go benchmarks
 .PHONY: bench

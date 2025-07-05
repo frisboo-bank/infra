@@ -7,13 +7,13 @@ SECTION_MAPS += build:Build
 build:
 	@echo "Building $(MODULE)..."
 	@mkdir -p $(BIN_DIR)
-	go build $(GOFLAGS) -o $(BIN_DIR)/$(notdir $(MODULE)) $(BOOTSTRAP)
+	go build $(GOFLAGS) -o $(BIN_DIR)/$(notdir $(MODULE)) $(BOOTSTRAP_DIR)
 
 ## build/run: Run the Go application locally
 .PHONY: run
 run:
 	@echo "Running $(MODULE)..."
-	go run $(BOOTSTRAP)
+	go run $(BOOTSTRAP_DIR)
 
 ## build/docker-build: Build the Docker image for the service
 .PHONY: docker-build
