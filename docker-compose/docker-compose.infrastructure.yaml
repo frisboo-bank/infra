@@ -1,0 +1,5 @@
+name: frisboo-bank-infrastructure
+
+networks:
+  frisboo-bank:
+    name: frisboo-bank
