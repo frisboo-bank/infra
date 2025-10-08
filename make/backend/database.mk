@@ -5,7 +5,7 @@ SECTION_MAPS += db:Database
 # Local DB info
 DB_TYPE ?=
 DB_POSTGRES_IMAGE ?= postgres:alpine
-DB_MONGO_IMAGE ?= mongo
+DB_MONGO_IMAGE ?= mongo:latest
 
 ## db/db-create-container: create the db container
 .PHONY: db-create-container
@@ -27,7 +27,7 @@ db-create-container:
 	fi; \
 	echo "Creating DB container $(DB_CONTAINER_NAME)"; \
 	case "$(DB_TYPE)" in \
-	  mongo) \
+	  mongodb) \
 			echo "Building a MongoDB container"; \
 			docker run --name $(DB_CONTAINER_NAME) \
 				-p $(DB_PORT):27017 \
