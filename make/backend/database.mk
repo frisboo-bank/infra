@@ -48,20 +48,16 @@ _db-create-container:
 			y|Y|yes|YES) return 0 ;; \
 			*) return 1 ;; \
 		esac \
-	};
-	\
+	}; \
 	error() { echo "Error: $$1" >&2; exit 1; }; \
-	\
 	DB_TYPE=$(call get-db-var,$(DB_TARGET),DB_TYPE); \
 	DB_CONTAINER_NAME=$(call get-db-var,$(DB_TARGET),DB_CONTAINER_NAME); \
 	DB_PORT=$(call get-db-var,$(DB_TARGET),DB_PORT); \
 	DB_USER=$(call get-db-var,$(DB_TARGET),DB_USER); \
 	DB_PASS=$(call get-db-var,$(DB_TARGET),DB_PASS); \
-	DB_NAME=$(call get-db-var,$(DB_TARGET),DB_NAME);
-	\
+	DB_NAME=$(call get-db-var,$(DB_TARGET),DB_NAME); \
 	echo "Target: $(DB_TARGET)"; \
 	echo "Type: $$DB_TYPE, Container: $$DB_CONTAINER_NAME, Port: $$DB_PORT"; \
-	\
 	containerId=$$(docker ps -aq -f "name=^$$DB_CONTAINER_NAME$$"); \
 	if [ -n "$$containerId" ]; then \
 		echo "DB container $$DB_CONTAINER_NAME already exists."; \
@@ -92,8 +88,7 @@ _db-create-container:
 		*) \
 			error "DB type $$DB_TYPE not supported. Use 'mongodb' or 'postgres'."; \
 			;; \
-	esac;
-	\
+	esac; \
 	echo "DB container $$DB_CONTAINER_NAME created successfully on port $$DB_PORT"
 
 .PHONY: _db-migrate
