@@ -40,7 +40,7 @@ db-reset: $(addprefix db-reset-,$(DB_TARGETS))
 db-reset-%:
 	@$(MAKE) _db-reset DB_TARGET=$*
 
-.PHONE: _db-create-container
+.PHONY: _db-create-container
 _db-create-container:
 	@ask() { \
 		read -p "$$1 [y/N] " ans; \
@@ -96,17 +96,17 @@ _db-create-container:
 	\
 	echo "DB container $$DB_CONTAINER_NAME created successfully on port $$DB_PORT"
 
-.PHONE: _db-migrate
+.PHONY: _db-migrate
 _db-migrate:
 	@DB_NAME=$(call get-db-var,$(DB_TARGET),DB_NAME); \
 	echo "Migrate Database $$DB_NAME"; \
 	go run cmd/migrations/main.go up $$DB_NAME;
 
-.PHONE: _db-drop
+.PHONY: _db-reset
 _db-reset:
 	DB_CONTAINER_NAME=$(call get-db-var,$(DB_TARGET),DB_CONTAINER_NAME); \
-	echo "Dropping Database $$DB_NAME"; \
-	echo "DB container $$DB_CONTAINER_NAME created successfully on port $$DB_PORT"
+	echo "Reset Database $$DB_NAME"; \
+	go run cmd/migrations/main.go reset $$DB_NAME;
 
 # Function to get database configuration - fixed version
 get-db-var = $(if $($1.$2),$($1.$2),$($2))
