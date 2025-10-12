@@ -26,7 +26,7 @@ db-create-container-%:
 .PHONY: db-migrate
 db-migrate: $(addprefix db-migrate-,$(DB_TARGETS))
 
-## db/db-migrate-container-<target>: migrate specific database
+## db/db-migrate-<target>: migrate specific database
 .PHONY: db-migrate-%
 db-migrate-%:
 	@$(MAKE) _db-migrate DB_TARGET=$*
@@ -35,7 +35,7 @@ db-migrate-%:
 .PHONY: db-reset
 db-reset: $(addprefix db-reset-,$(DB_TARGETS))
 
-## db/db-reset-container-<target>: reset specific database
+## db/db-reset-<target>: reset specific database
 .PHONY: db-reset-%
 db-reset-%:
 	@$(MAKE) _db-reset DB_TARGET=$*
@@ -90,7 +90,7 @@ _db-create-container:
 				-d $(DB_POSTGRES_IMAGE) || error "Failed to create PostgreSQL container"; \
 			;; \
 		*) \
-			error "DB type $$DB_TYPE not supported. Use 'mongo' or 'postgres'."; \
+			error "DB type $$DB_TYPE not supported. Use 'mongodb' or 'postgres'."; \
 			;; \
 	esac;
 	\
@@ -104,7 +104,7 @@ _db-migrate:
 
 .PHONY: _db-reset
 _db-reset:
-	DB_CONTAINER_NAME=$(call get-db-var,$(DB_TARGET),DB_CONTAINER_NAME); \
+	@DB_NAME=$(call get-db-var,$(DB_TARGET),DB_NAME); \
 	echo "Reset Database $$DB_NAME"; \
 	go run cmd/migrations/main.go reset $$DB_NAME;
 
